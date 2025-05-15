@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Practice | EnglishSkills</title>
+    <style>
+        /* Reuse all existing styles from index.html */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .main-header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            box-sizing: border-box;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4bacc6;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-tab {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-tab.active {
+            background-color: #c0504d;
+            color: white;
+        }
+        
+        .nav-tab:hover:not(.active) {
+            background-color: #f0f8fa;
+            color: #4bacc6;
+        }
+        
+        .main-content {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+        }
+        
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-right: 25px;
+            height: fit-content;
+        }
+        
+        .sidebar-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-item {
+            padding: 12px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .sidebar-item:hover, .sidebar-item.active {
+            background-color: #f0f8fa;
+            color: #c0504d;
+        }
+        
+        /* Content area styles */
+        .content-area {
+            flex: 1;
+        }
+        
+        .page-title {
+            font-size: 28px;
+            color: #c0504d;
+            margin-bottom: 20px;
+        }
+        
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .test-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .test-header {
+            padding: 15px 20px;
+            background-color: #c0504d;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .test-content {
+            padding: 20px;
+        }
+        
+        .test-info {
+            margin-bottom: 15px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .test-button {
+            padding: 10px 20px;
+            background-color: #c0504d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .test-button:hover {
+            background-color: #a94442;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        
+        .page-number {
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: white;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .page-number.active, .page-number:hover {
+            background-color: #c0504d;
+            color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .user-name {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with logo and navigation tabs -->
+    <header class="main-header">
+        <div class="logo">
+            <img src="https://ieltsonlinetests.com/themes/iot/images/logo.svg" alt="English Skills Logo">
+            <div class="logo-text">EnglishSkills</div>
+        </div>
+        
+        <nav class="nav-tabs">
+            <div class="nav-tab">
+                <span class="skill-icon">🏠</span>
+                Home
+            </div>
+            <div class="nav-tab">
+                <span class="skill-icon">🎧</span>
+                Listening
+            </div>
+            <div class="nav-tab active">
+                <span class="skill-icon">📚</span>
+                Reading
+            </div>
+            <div class="nav-tab">
+                <span class="skill-icon">🗣️</span>
+                Speaking
+            </div>
+            <div class="nav-tab">
+                <span class="skill-icon">✏️</span>
+                Writing
+            </div>
+        </nav>
+        
+        <div class="user-section">
+            <div class="user-profile">
+                <div class="user-avatar">JD</div>
+                <div class="user-name">John Doe</div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content area -->
+    <main class="main-content">
+        <!-- Sidebar with Cambridge test options -->
+        <aside class="sidebar">
+            <h2 class="sidebar-title">Cambridge Tests</h2>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item active">Cam 19</li>
+                <li class="sidebar-item">Cam 18</li>
+                <li class="sidebar-item">Cam 17</li>
+                <li class="sidebar-item">Cam 16</li>
+                <li class="sidebar-item">Cam 15</li>
+                <li class="sidebar-item">Cam 14</li>
+                <li class="sidebar-item">Cam 13</li>
+                <li class="sidebar-item">Cam 12</li>
+            </ul>
+        </aside>
+        
+        <!-- Content area with test grids -->
+        <div class="content-area">
+            <h1 class="page-title">Reading Practice Tests</h1>
+            
+            <div class="tests-grid">
+                <!-- Test Card 1 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 19 Test 4</div>
+                    <div class="test-content">
+                        <p class="test-info">Latest Cambridge IELTS 19 Reading Test 4 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 2 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 19 Test 3</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 19 Reading Test 3 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 3 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 19 Test 2</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 19 Reading Test 2 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 4 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 19 Test 1</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 19 Reading Test 1 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 5 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 18 Test 4</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 18 Reading Test 4 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 6 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 18 Test 3</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 18 Reading Test 3 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button">Start Test</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="page-number active">1</div>
+                <div class="page-number">2</div>
+                <div class="page-number">3</div>
+                <div class="page-number">4</div>
+                <div class="page-number">5</div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 EnglishSkills. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // JavaScript for tab switching
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.nav-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // In a real app, this would navigate to the selected page
+                // For this demo, we're just showing the Reading page
+            });
+        });
+        
+        // JavaScript for sidebar menu
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all items
+                document.querySelectorAll('.sidebar-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+                item.classList.add('active');
+                
+                // In a real app, this would filter the tests by the selected Cambridge version
+                console.log(`Selected ${item.textContent} tests`);
+            });
+        });
+        
+        // JavaScript for test buttons
+        document.querySelectorAll('.test-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const testName = button.closest('.test-card').querySelector('.test-header').textContent;
+                console.log(`Starting ${testName}`);
+                // This would navigate to the specific test page
+            });
+        });
+        
+        // JavaScript for pagination
+        document.querySelectorAll('.page-number').forEach(page => {
+            page.addEventListener('click', () => {
+                // Remove active class from all pages
+                document.querySelectorAll('.page-number').forEach(p => {
+                    p.classList.remove('active');
+                });
+                
+                // Add active class to clicked page
+                page.classList.add('active');
+                
+                // In a real app, this would load the selected page of tests
+                console.log(`Loading page ${page.textContent}`);
+            });
+        });
+    </script>
+</body>
+</html>
