@@ -51,6 +51,29 @@ app.get('/me', (req, res) => {
     res.status(401).json({ message: 'Not logged in' });
   }
 });
+// Login route
+app.post('/login', (req, res) => {
+  // You can later validate username/password from req.body
+  req.session.user = { name: 'John Doe' };
+  res.json({ success: true });
+});
+
+// Logout route
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) return res.json({ success: false });
+    res.json({ success: true });
+  });
+});
+
+// Check session route
+app.get('/me', (req, res) => {
+  if (req.session.user) {
+    res.json({ user: req.session.user });
+  } else {
+    res.status(401).json({ message: 'Not logged in' });
+  }
+});
 
 // Start server
 app.listen(PORT, () => {
