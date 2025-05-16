@@ -13,7 +13,7 @@
             <img src="https://ieltsonlinetests.com/themes/iot/images/logo.svg" alt="English Skills Logo">
             <div class="logo-text">EnglishSkills</div>
         </div>
-        
+
         <nav class="nav-tabs">
             <div class="nav-tab active">
                 <span class="skill-icon">🏠</span>
@@ -24,9 +24,9 @@
                 Listening
             </div>
             <a href="reading.html" class="nav-tab">
-        <span class="skill-icon">📚</span>
-        Reading
-    </a>
+                <span class="skill-icon">📚</span>
+                Reading
+            </a>
             <div class="nav-tab">
                 <span class="skill-icon">🗣️</span>
                 Speaking
@@ -36,15 +36,13 @@
                 Writing
             </div>
         </nav>
-        
-        <div class="user-section">
-            <div class="user-profile">
-                <div class="user-avatar">JD</div>
-                <div class="user-name">John Doe</div>
-            </div>
+
+        <div class="user-section" id="userSection">
+            <button id="signInBtn">Sign In</button>
+            <button id="signOutBtn" style="display: none;">Sign Out</button>
         </div>
     </header>
-    
+
     <!-- Main content area -->
     <main class="main-content-1">
         <!-- Welcome section -->
@@ -52,7 +50,7 @@
             <h1 class="welcome-title">Improve Your English Skills</h1>
             <p class="welcome-subtitle">Practice all four essential English language skills: listening, reading, speaking, and writing. Track your progress and enhance your proficiency with our comprehensive learning platform.</p>
         </section>
-        
+
         <!-- Skills grid -->
         <div class="skills-grid">
             <!-- Listening skill card -->
@@ -66,7 +64,7 @@
                     <a href="#" class="practice-button listening">Start Practicing</a>
                 </div>
             </div>
-            
+
             <!-- Reading skill card -->
             <div class="skill-card">
                 <div class="skill-header reading">
@@ -78,7 +76,7 @@
                     <a href="reading.html" class="practice-button reading">Start Practicing</a>
                 </div>
             </div>
-            
+
             <!-- Speaking skill card -->
             <div class="skill-card">
                 <div class="skill-header speaking">
@@ -90,7 +88,7 @@
                     <a href="#" class="practice-button speaking">Start Practicing</a>
                 </div>
             </div>
-            
+
             <!-- Writing skill card -->
             <div class="skill-card">
                 <div class="skill-header writing">
@@ -104,33 +102,71 @@
             </div>
         </div>
     </main>
-    
+
     <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2025 EnglishSkills. All rights reserved.</p>
     </footer>
-    
+
     <script>
-        // JavaScript for tab switching
+        // Tab switching
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                // Remove active class from all tabs
-                document.querySelectorAll('.nav-tab').forEach(t => {
-                    t.classList.remove('active');
-                });
-                
-                // Add active class to clicked tab
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
             });
         });
-        
-        // JavaScript for practice buttons
+
+        // Practice buttons
         document.querySelectorAll('.practice-button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                                const skill = button.classList[1]; // Get the skill class (listening, reading, etc.)
+            button.addEventListener('click', () => {
+                const skill = button.classList[1];
                 console.log(`Starting ${skill} practice`);
-                // This would navigate to the specific skill practice page
             });
+        });
+
+        // Sign In / Sign Out logic
+        const signInBtn = document.getElementById('signInBtn');
+        const signOutBtn = document.getElementById('signOutBtn');
+
+        function updateUI(loggedIn) {
+            if (loggedIn) {
+                signInBtn.style.display = 'none';
+                signOutBtn.style.display = 'inline-block';
+            } else {
+                signInBtn.style.display = 'inline-block';
+                signOutBtn.style.display = 'none';
+            }
+        }
+
+        // Check login status (optional API call)
+        fetch('/me', { credentials: 'include' })
+            .then(res => res.ok)
+            .then(loggedIn => updateUI(loggedIn))
+            .catch(() => updateUI(false));
+
+        signInBtn.addEventListener('click', () => {
+            fetch('/login', {
+                method: 'POST',
+                credentials: 'include'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) updateUI(true);
+                    else alert('Login failed');
+                });
+        });
+
+        signOutBtn.addEventListener('click', () => {
+            fetch('/logout', {
+                method: 'POST',
+                credentials: 'include'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) updateUI(false);
+                    else alert('Logout failed');
+                });
         });
     </script>
 </body>
