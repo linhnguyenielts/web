@@ -833,7 +833,7 @@ body {
     box-shadow: 0 4px 15px rgba(179, 107, 37, 0.3);
     position: relative;
     overflow: hidden;
-    background-color: var(--primary-orange);
+    background-color: var(--primary-oranges);
     color: white;
     border-color: var(--primary-orange);
 }
@@ -898,4 +898,59 @@ a {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
     margin-bottom: 40px;
+}
+/* User Dropdown Styles */
+#userDropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Sign Out Button Styles */
+#signOutBtn {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: var(--primary-orange);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(179, 107, 37, 0.3);
+    z-index: 110; /* Above other elements */
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+#signOutBtn:hover {
+    background-color: var(--secondary-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(179, 107, 37, 0.4);
+}
+
+#signOutBtn:active {
+    transform: translateY(1px);
+}
+
+/* Dropdown arrow indicator */
+#userDropdown::after {
+    content: "▼";
+    font-size: 10px;
+    margin-left: 8px;
+    color: var(--primary-blue);
+    transition: transform 0.3s ease;
+}
+
+/* Show sign out button when dropdown is active */
+#userDropdown.active #signOutBtn {
+    display: block;
+}
+
+#userDropdown.active::after {
+    transform: rotate(180deg);
 }
