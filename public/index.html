@@ -37,10 +37,15 @@
             </div>
         </nav>
 
-        <div class="user-section" id="userSection">
-            <button id="signInBtn">Sign In</button>
-            <button id="signOutBtn" style="display: none;">Sign Out</button>
-        </div>
+       <div class="user-section" id="userSection">
+  <button id="signInBtn">Sign In</button>
+  
+  <!-- Username display (hidden initially) -->
+  <div id="userDropdown" style="display:none; position: relative; cursor: pointer;">
+    <span id="userAbbr" style="font-weight: bold;"></span>
+    <button id="signOutBtn" style="display: none; margin-left: 10px;">Sign Out</button>
+  </div>
+</div>
     </header>
 
     <!-- Main content area -->

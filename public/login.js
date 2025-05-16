@@ -1,22 +1,30 @@
 const backendURL = ''; // empty because frontend & backend served together
 
+function abbreviateUsername(username) {
+  if (username.length <= 3) return username.toUpperCase();
+  return username.slice(0, 3).toUpperCase();
+}
+
 function updateUI(loggedIn, username = '') {
   const signInBtn = document.getElementById('signInBtn');
+  const userDropdown = document.getElementById('userDropdown');
+  const userAbbr = document.getElementById('userAbbr');
   const signOutBtn = document.getElementById('signOutBtn');
-  const userNameDisplay = document.getElementById('userNameDisplay');
 
   if (loggedIn) {
     if (signInBtn) signInBtn.style.display = 'none';
-    if (signOutBtn) signOutBtn.style.display = 'inline-block';
-    if (userNameDisplay) userNameDisplay.textContent = `Hello, ${username}`;
+    if (userDropdown) userDropdown.style.display = 'inline-block';
+    if (userAbbr) userAbbr.textContent = abbreviateUsername(username);
+    if (signOutBtn) signOutBtn.style.display = 'none'; // hide sign out initially
   } else {
     if (signInBtn) signInBtn.style.display = 'inline-block';
+    if (userDropdown) userDropdown.style.display = 'none';
     if (signOutBtn) signOutBtn.style.display = 'none';
-    if (userNameDisplay) userNameDisplay.textContent = '';
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Check if user is logged in
   fetch('/me', { credentials: 'include' })
     .then(res => {
       if (!res.ok) throw new Error('Not logged in');
@@ -29,7 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
       updateUI(false);
     });
 
-  // Sign out button logic (if exists)
+  // Toggle sign out button when username clicked
+  const userAbbr = document.getElementById('userAbbr');
+  if (userAbbr) {
+    userAbbr.addEventListener('click', () => {
+      const signOutBtn = document.getElementById('signOutBtn');
+      if (!signOutBtn) return;
+      signOutBtn.style.display = signOutBtn.style.display === 'none' ? 'inline-block' : 'none';
+    });
+  }
+
+  // Sign out button logic
   const signOutBtn = document.getElementById('signOutBtn');
   if (signOutBtn) {
     signOutBtn.addEventListener('click', () => {
