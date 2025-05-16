@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Skills Practice</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header with logo and navigation tabs -->
+    <header class="main-header">
+        <div class="logo">
+            <img src="https://ieltsonlinetests.com/themes/iot/images/logo.svg" alt="English Skills Logo">
+            <div class="logo-text">EnglishSkills</div>
+        </div>
+
+        <nav class="nav-tabs">
+            <div class="nav-tab active">
+                <span class="skill-icon">🏠</span>
+                Home
+            </div>
+            <div class="nav-tab">
+                <span class="skill-icon">🎧</span>
+                Listening
+            </div>
+            <a href="reading.html" class="nav-tab">
+                <span class="skill-icon">📚</span>
+                Reading
+            </a>
+            <div class="nav-tab">
+                <span class="skill-icon">🗣️</span>
+                Speaking
+            </div>
+            <div class="nav-tab">
+                <span class="skill-icon">✏️</span>
+                Writing
+            </div>
+        </nav>
+
+        <div class="user-section" id="userSection">
+            <button id="signInBtn">Sign In</button>
+            <button id="signOutBtn" style="display: none;">Sign Out</button>
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <main class="main-content-1">
+        <!-- Welcome section -->
+        <section class="welcome-section">
+            <h1 class="welcome-title">Improve Your English Skills</h1>
+            <p class="welcome-subtitle">Practice all four essential English language skills: listening, reading, speaking, and writing. Track your progress and enhance your proficiency with our comprehensive learning platform.</p>
+        </section>
+
+        <!-- Skills grid -->
+        <div class="skills-grid">
+            <!-- Listening skill card -->
+            <div class="skill-card">
+                <div class="skill-header listening">
+                    <span class="skill-icon">🎧</span>
+                    Listening
+                </div>
+                <div class="skill-content">
+                    <p class="skill-description">Improve your ability to understand spoken English with a variety of audio exercises, conversations, lectures, and more.</p>
+                    <a href="#" class="practice-button listening">Start Practicing</a>
+                </div>
+            </div>
+
+            <!-- Reading skill card -->
+            <div class="skill-card">
+                <div class="skill-header reading">
+                    <span class="skill-icon">📚</span>
+                    Reading
+                </div>
+                <div class="skill-content">
+                    <p class="skill-description">Enhance your reading comprehension with passages from various sources including articles, stories, and academic texts.</p>
+                    <a href="reading.html" class="practice-button reading">Start Practicing</a>
+                </div>
+            </div>
+
+            <!-- Speaking skill card -->
+            <div class="skill-card">
+                <div class="skill-header speaking">
+                    <span class="skill-icon">🗣️</span>
+                    Speaking
+                </div>
+                <div class="skill-content">
+                    <p class="skill-description">Practice your pronunciation, fluency, and conversational skills with interactive speaking exercises and assessments.</p>
+                    <a href="#" class="practice-button speaking">Start Practicing</a>
+                </div>
+            </div>
+
+            <!-- Writing skill card -->
+            <div class="skill-card">
+                <div class="skill-header writing">
+                    <span class="skill-icon">✏️</span>
+                    Writing
+                </div>
+                <div class="skill-content">
+                    <p class="skill-description">Develop your writing skills with guided exercises for various formats including essays, emails, reports, and creative writing.</p>
+                    <a href="#" class="practice-button writing">Start Practicing</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 EnglishSkills. All rights reserved.</p>
+    </footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Tab switching
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+        });
+    });
+
+    // Practice buttons
+    document.querySelectorAll('.practice-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const skill = button.classList[1];
+            console.log(`Starting ${skill} practice`);
+        });
+    });
+
+    const signInBtn = document.getElementById('signInBtn');
+    const signOutBtn = document.getElementById('signOutBtn');
+    const loginModal = document.getElementById('loginModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalLoginBtn = document.getElementById('modalLoginBtn');
+    const modalCancelBtn = document.getElementById('modalCancelBtn');
+    const modalUsername = document.getElementById('modalUsername');
+    const modalPassword = document.getElementById('modalPassword');
+
+    function updateUI(loggedIn) {
+        if (loggedIn) {
+            signInBtn.style.display = 'none';
+            signOutBtn.style.display = 'inline-block';
+        } else {
+            signInBtn.style.display = 'inline-block';
+            signOutBtn.style.display = 'none';
+        }
+    }
+
+    const backendURL = 'https://web-job3.onrender.com';
+
+    // Check login status (optional API call)
+    fetch('/me', { credentials: 'include' })
+        .then(res => res.ok)
+        .then(loggedIn => updateUI(loggedIn))
+        .catch(() => updateUI(false));
+
+    // Show login modal on Sign In click
+    signInBtn.addEventListener('click', () => {
+        loginModal.style.display = 'block';
+        modalOverlay.style.display = 'block';
+        modalUsername.focus();
+    });
+
+    // Hide modal on Cancel click
+    modalCancelBtn.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        modalOverlay.style.display = 'none';
+        modalUsername.value = '';
+        modalPassword.value = '';
+    });
+
+    // Hide modal on overlay click
+    modalOverlay.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        modalOverlay.style.display = 'none';
+        modalUsername.value = '';
+        modalPassword.value = '';
+    });
+
+    // Handle login form submission
+    modalLoginBtn.addEventListener('click', () => {
+        const username = modalUsername.value.trim();
+        const password = modalPassword.value;
+
+        if (!username || !password) {
+            alert('Please enter username and password');
+            return;
+        }
+
+        fetch(`/login`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                updateUI(true);
+                loginModal.style.display = 'none';
+                modalOverlay.style.display = 'none';
+                modalUsername.value = '';
+                modalPassword.value = '';
+            } else {
+                alert('Login failed: ' + (data.message || 'Invalid credentials'));
+            }
+        })
+        .catch(() => alert('Error connecting to server'));
+    });
+
+    // Handle logout
+    signOutBtn.addEventListener('click', () => {
+        fetch(`/logout`, {
+            method: 'POST',
+            credentials: 'include'
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) updateUI(false);
+            else alert('Logout failed');
+        });
+    });
+});
+</script>
+
+    <!-- Login Modal -->
+<div id="loginModal">
+  <h2>Sign In</h2>
+  <input type="text" id="modalUsername" placeholder="Username">
+  <input type="password" id="modalPassword" placeholder="Password">
+  <div class="modal-buttons">
+    <button id="modalLoginBtn">Login</button>
+    <button id="modalCancelBtn">Cancel</button>
+  </div>
+</div>
+
+<!-- Optional overlay to dim background -->
+<div id="modalOverlay" style="display:none; position: fixed; top:0; left:0; 
+    width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 999;"></div>
+
+</body>
+</html>

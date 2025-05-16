@@ -1,0 +1,901 @@
+:root {
+    --primary-blue: #4e99e2;
+    --secondary-blue: #3a87d0;
+    --primary-orange: #b36b25;
+    --secondary-orange: #9c5b1e;
+    --accent-peach: #f8b195;
+    --light-blue: #e6f0fa;
+    --background-color: #f5faff;
+    --shadow-color: rgba(100, 150, 220, 0.2);
+    --text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+    --listening-color: #4e99e2;
+    --reading-color: #db6a8f;
+    --speaking-color: #8bbb54;
+    --writing-color: #9175ab;
+}
+
+body {
+    font-family: 'Arial Rounded MT Bold', 'Nunito', 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f6ff;
+    background-image: linear-gradient(135deg, #e6f0ff 25%, transparent 25%),
+    linear-gradient(225deg, #e6f0ff 25%, transparent 25%),
+    linear-gradient(45deg, #e6f0ff 25%, transparent 25%),
+    linear-gradient(315deg, #e6f0ff 25%, transparent 25%);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 0, 25px -25px, 0px 25px;
+    background-opacity: 0.3;
+}
+
+.main-header {
+    background-color: white;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 1400px;
+    z-index: 100;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 3px solid white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 45px;
+    margin-right: 15px;
+    filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.1));
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-blue);
+    position: relative;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.08);
+    letter-spacing: 0.5px;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-tab {
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid transparent;
+    font-size: 14px;
+    color: #555;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-tab.active {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+    box-shadow: 0 5px 15px rgba(78, 153, 226, 0.3);
+    transform: translateY(-2px);
+}
+
+.nav-tab:hover:not(.active) {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+    border-color: var(--primary-blue);
+}
+
+.main-content-1 {
+    margin-top: 110px;
+    padding: 30px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.welcome-title {
+    font-size: 30px;
+    color: #4e99e2;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.08);
+    letter-spacing: 1px;
+}
+
+.welcome-subtitle {
+    font-size: 18px;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.welcome-section::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: 30px;
+    width: 60px;
+    height: 80px;
+    background-color: var(--primary-orange);
+    border-radius: 5px;
+    transform: rotate(15deg);
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    z-index: -1;
+}
+
+.welcome-section::after {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: 70px;
+    width: 60px;
+    height: 80px;
+    background-color: var(--primary-blue);
+    border-radius: 5px;
+    transform: rotate(-5deg);
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    z-index: -2;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.skill-card {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px var(--shadow-color);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid white;
+}
+
+.skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.skill-header {
+    padding: 15px 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.skill-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 2px;
+}
+
+.skill-header.listening {
+    background-color: var(--listening-color);
+}
+
+.skill-header.reading {
+    background-color: var(--reading-color);
+}
+
+.skill-header.speaking {
+    background-color: var(--speaking-color);
+}
+
+.skill-header.writing {
+    background-color: var(--writing-color);
+}
+
+.skill-content {
+    padding: 25px;
+}
+
+.skill-description {
+    margin-bottom: 25px;
+    line-height: 1.8;
+    color: #444;
+    font-size: 16px;
+}
+
+.practice-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.practice-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 50px;
+}
+
+.practice-button.listening {
+    background-color: var(--listening-color);
+}
+
+.practice-button.reading {
+    background-color: var(--reading-color);
+}
+
+.practice-button.speaking {
+    background-color: var(--speaking-color);
+}
+
+.practice-button.writing {
+    background-color: var(--writing-color);
+}
+
+.practice-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.practice-button:active {
+    transform: translateY(1px);
+}
+
+.skill-icon {
+    font-size: 26px;
+    filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.1));
+}
+
+.footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 60px;
+    color: #666;
+    font-size: 16px;
+    position: relative;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    background-color: var(--light-blue);
+    cursor: pointer;
+    border: 2px solid white;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.user-profile:hover {
+    background-color: #d9e9f7;
+    transform: translateY(-2px);
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.user-name {
+    font-weight: bold;
+    color: #444;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+    position: relative;
+}
+
+.progress-steps::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background-color: var(--primary-blue);
+    z-index: 1;
+}
+
+.step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: 3px solid var(--primary-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-blue);
+    position: relative;
+    z-index: 2;
+    margin: 0 20px;
+    box-shadow: 0 4px 10px rgba(78, 153, 226, 0.2);
+}
+
+.step.active {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.step-label {
+    position: absolute;
+    bottom: -30px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary-blue);
+    width: 80px;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+}
+
+}
+
+@media (max-width: 768px) {
+    .main-header {
+    flex-direction: column;
+    gap: 15px;
+}
+
+}
+
+@media (max-width: 480px) {
+    .main-content-1 {
+    padding: 20px 15px;
+}
+
+}
+
+
+
+.main-content {
+    margin-top: 110px;
+    display: flex;
+    gap: 30px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background-color: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px var(--shadow-color);
+    border: 3px solid white;
+    position: sticky;
+    top: 130px;
+    height: fit-content;
+    margin-bottom: 20px;
+    margin-left: 2.5%;
+    margin-top: 20px;
+    align-self: flex-start;
+}
+
+.sidebar-title {
+    color: var(--primary-orange);
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--accent-peach);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+    position: relative;
+}
+
+.sidebar-title::before {
+    content: "📚";
+    position: absolute;
+    right: 5px;
+    top: -5px;
+    font-size: 24px;
+    opacity: 0.8;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex-direction: column;
+}
+
+.sidebar-item {
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    color: #555;
+    position: relative;
+    padding-left: 35px;
+    flex: 1 0 auto;
+    min-width: 100px;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sidebar-item:hover {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    transform: translateX(5px);
+}
+
+.sidebar-item::before {
+    content: "📝";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    display: none;
+}
+
+.content-area {
+    flex: 1;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.page-title {
+    color: var(--primary-orange);
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.08);
+    position: relative;
+    display: inline-block;
+}
+
+.page-title::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--accent-peach);
+    border-radius: 2px;
+}
+
+.tests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.test-card {
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid white;
+}
+
+.test-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.test-header {
+    background-color: var(--reading-color);
+    color: white;
+    padding: 15px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.test-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: rgba(255,255,255,0.3);
+}
+
+.test-content {
+    padding: 20px;
+}
+
+.test-info {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.test-button-r {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--reading-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(219, 106, 143, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.test-button-r::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 50px;
+}
+
+.test-button-r:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(219, 106, 143, 0.5);
+}
+
+.test-button-r:active {
+    transform: translateY(1px);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.page-number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    color: #555;
+    background-color: white;
+    box-shadow: 0 3px 10px var(--shadow-color);
+    border: 2px solid white;
+}
+
+.page-number:hover:not(.active) {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.page-number.active {
+    background-color: var(--primary-blue);
+    color: white;
+    box-shadow: 0 5px 15px rgba(78, 153, 226, 0.3);
+}
+
+@media (max-width: 900px) {
+    .main-content {
+    flex-direction: column;
+}
+
+}
+
+@media (max-width: 600px) {
+    .tests-grid {
+    grid-template-columns: 1fr;
+}
+
+}
+
+
+.main-content {
+    margin-top: 110px;
+    padding: 0;
+}
+
+#loginModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 25px var(--shadow-color);
+    z-index: 1000;
+    width: 350px;
+    max-width: 90%;
+    border: 3px solid white;
+    box-sizing: border-box;
+}
+
+#loginModal h2 {
+    color: var(--primary-blue);
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+}
+
+#modalUsername {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+#modalPassword {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+#modalUsername:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(78, 153, 226, 0.2);
+}
+
+#modalPassword:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(78, 153, 226, 0.2);
+}
+
+#modalLoginBtn {
+    padding: 12px 25px;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    background-color: var(--primary-blue);
+    color: white;
+    box-shadow: 0 4px 15px rgba(78, 153, 226, 0.3);
+}
+
+#modalCancelBtn {
+    padding: 12px 25px;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    background-color: white;
+    color: #555;
+    margin-left: 10px;
+    border-color: #ddd;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+#modalLoginBtn:hover {
+    background-color: var(--secondary-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78, 153, 226, 0.4);
+}
+
+#modalCancelBtn:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-3px);
+    border-color: #ccc;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#loginModal input {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+#loginModal input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(78, 153, 226, 0.2);
+}
+
+#signInBtn {
+    padding: 12px 25px;
+    border: 2px solid var(--primary-blue);
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+#signOutBtn {
+    padding: 12px 25px;
+    border: 2px solid var(--primary-blue);
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(179, 107, 37, 0.3);
+    position: relative;
+    overflow: hidden;
+    background-color: var(--primary-orange);
+    color: white;
+    border-color: var(--primary-orange);
+}
+
+#signInBtn:hover {
+    background-color: var(--secondary-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78, 153, 226, 0.4);
+}
+
+#signOutBtn:hover {
+    background-color: var(--secondary-orange);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(179, 107, 37, 0.4);
+}
+
+#signInBtn:active {
+    transform: translateY(1px);
+}
+
+#signOutBtn:active {
+    transform: translateY(1px);
+}
+
+a {
+    text-decoration: none;
+}
+
+.main-content {
+    margin-top: 110px;
+    display: flex;
+    gap: 30px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2.5%;
+    width: 95%;a
+}
+
+.page-title-r {
+    position: relative;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--reading-color);
+    font-size: 32px;
+    margin: 0 0 50px 0;
+    padding: 12px 30px;
+    background-color: white;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    z-index: 90;
+    white-space: nowrap;
+    border: 3px solid white;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.08);
+    display: block;
+    align-self: flex-start;
+    width: auto;
+}
+.tests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}

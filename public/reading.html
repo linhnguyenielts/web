@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Practice | EnglishSkills</title>
+    <link rel="stylesheet" href="styles.css">
+	</head>
+<body>
+    <!-- Header with logo and navigation tabs -->
+    <header class="main-header">
+        <div class="logo">
+            <img src="https://ieltsonlinetests.com/themes/iot/images/logo.svg" alt="English Skills Logo">
+            <div class="logo-text">EnglishSkills</div>
+        </div>
+
+        <nav class="nav-tabs">
+            <a href="index.html" class="nav-tab">
+                <span class="skill-icon">🏠</span>
+                Home
+            </a>
+            <div class="nav-tab">
+                <span class="skill-icon">🎧</span>
+                Listening
+            </div>
+            <div class="nav-tab active">
+                <span class="skill-icon">📚</span>
+                Reading
+            </div>
+            <div class="nav-tab">
+                <span class="skill-icon">🗣️</span>
+                Speaking
+            </div>
+            <div class="nav-tab">
+                <span class="skill-icon">✏️</span>
+                Writing
+            </div>
+        </nav>
+
+        <div class="user-section" id="userSection">
+            <button id="signInBtn">Sign In</button>
+            <button id="signOutBtn" style="display: none;">Sign Out</button>
+        </div>
+    </header>
+    
+    <!-- Main content area -->
+    <main class="main-content">
+        <!-- Sidebar with Cambridge test options -->
+        <aside class="sidebar">
+            <h2 class="sidebar-title">Cambridge Tests</h2>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">Cam 19</li>
+                <li class="sidebar-item">Cam 18</li>
+                <li class="sidebar-item">Cam 17</li>
+                <li class="sidebar-item">Cam 16</li>
+                <li class="sidebar-item">Cam 15</li>
+                <li class="sidebar-item">Cam 14</li>
+                <li class="sidebar-item">Cam 13</li>
+                <li class="sidebar-item">Cam 12</li>
+            </ul>
+        </aside>
+        
+        <!-- Content area with test grids -->
+        <div class="content-area">
+            <h1 class="page-title-r">Reading Practice Tests</h1>
+            
+            <div class="tests-grid">
+                <!-- Test Card 1 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 19 Test 4</div>
+                    <div class="test-content">
+                        <p class="test-info">Latest Cambridge IELTS 19 Reading Test 4 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button-r">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 2 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 19 Test 3</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 19 Reading Test 3 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button-r">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 3 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 19 Test 2</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 19 Reading Test 2 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button-r">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 4 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 19 Test 1</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 19 Reading Test 1 with answers and detailed explanations.</p>
+                        <a href="cam19-1.html" class="test-button-r">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 5 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 18 Test 4</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 18 Reading Test 4 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button-r">Start Test</a>
+                    </div>
+                </div>
+                
+                <!-- Test Card 6 -->
+                <div class="test-card">
+                    <div class="test-header">Cam 18 Test 3</div>
+                    <div class="test-content">
+                        <p class="test-info">Cambridge IELTS 18 Reading Test 3 with answers and detailed explanations.</p>
+                        <a href="#" class="test-button-r">Start Test</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="page-number active">1</div>
+                <div class="page-number">2</div>
+                <div class="page-number">3</div>
+                <div class="page-number">4</div>
+                <div class="page-number">5</div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 EnglishSkills. All rights reserved.</p>
+    </footer>
+    
+    <script>
+	
+    // JavaScript for tab switching
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(t => {
+                t.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            tab.classList.add('active');
+            
+            // In a real app, this would navigate to the selected page
+            // For this demo, we're just showing the Reading page
+        });
+    });
+    
+    // JavaScript for sidebar menu
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.addEventListener('click', () => {
+            // Remove active class from all items
+            document.querySelectorAll('.sidebar-item').forEach(i => {
+                i.classList.remove('active');
+            });
+            
+            // Add active class to clicked item
+            item.classList.add('active');
+            
+            // In a real app, this would filter the tests by the selected Cambridge version
+            console.log(`Selected ${item.textContent} tests`);
+        });
+    });
+    
+    // Check if user is logged in (in a real app, this would be a proper authentication check)
+    function isUserLoggedIn() {
+        // For demo purposes, we'll check if the user name is displayed
+        // In a real app, you would check authentication status from your backend
+        const userNameElement = document.querySelector('.user-name');
+        return userNameElement && userNameElement.textContent !== '';
+    }
+    
+    // JavaScript for test buttons
+    document.querySelectorAll('.test-button-r').forEach(button => {
+        button.addEventListener('click', (e) => {
+            if (!isUserLoggedIn()) {
+                e.preventDefault(); // Prevent default action (navigation)
+                const testName = button.closest('.test-card').querySelector('.test-header').textContent;
+                const shouldLogin = confirm(`You need to log in to start ${testName}. Would you like to log in now?`);
+                if (shouldLogin) {
+                    // Redirect to login page (you would replace this with your actual login page URL)
+                    window.location.href = 'login.html';
+                }
+            } else {
+                const testName = button.closest('.test-card').querySelector('.test-header').textContent;
+                console.log(`Starting ${testName}`);
+                // This would navigate to the specific test page
+                // For demo, we'll allow navigation only for the Cam 19 Test 1 link
+                if (!button.getAttribute('href') || button.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    console.log(`Test page would load here for ${testName}`);
+                }
+            }
+        });
+    });
+    
+    // JavaScript for pagination
+    document.querySelectorAll('.page-number').forEach(page => {
+        page.addEventListener('click', () => {
+            // Remove active class from all pages
+            document.querySelectorAll('.page-number').forEach(p => {
+                p.classList.remove('active');
+            });
+            
+            // Add active class to clicked page
+            page.classList.add('active');
+            
+            // In a real app, this would load the selected page of tests
+            console.log(`Loading page ${page.textContent}`);
+        });
+    });
+</script>
+</body>
+</html>
