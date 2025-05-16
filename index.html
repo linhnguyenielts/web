@@ -107,126 +107,120 @@
     <footer class="footer">
         <p>&copy; 2025 EnglishSkills. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Tab switching
-        document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-            });
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Tab switching
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
         });
+    });
 
-        // Practice buttons
-        document.querySelectorAll('.practice-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const skill = button.classList[1];
-                console.log(`Starting ${skill} practice`);
-            });
+    // Practice buttons
+    document.querySelectorAll('.practice-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const skill = button.classList[1];
+            console.log(`Starting ${skill} practice`);
         });
+    });
 
-        // Sign In / Sign Out logic
-        const signInBtn = document.getElementById('signInBtn');
-        const signOutBtn = document.getElementById('signOutBtn');
+    const signInBtn = document.getElementById('signInBtn');
+    const signOutBtn = document.getElementById('signOutBtn');
+    const loginModal = document.getElementById('loginModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalLoginBtn = document.getElementById('modalLoginBtn');
+    const modalCancelBtn = document.getElementById('modalCancelBtn');
+    const modalUsername = document.getElementById('modalUsername');
+    const modalPassword = document.getElementById('modalPassword');
 
-        function updateUI(loggedIn) {
-            if (loggedIn) {
-                signInBtn.style.display = 'none';
-                signOutBtn.style.display = 'inline-block';
-            } else {
-                signInBtn.style.display = 'inline-block';
-                signOutBtn.style.display = 'none';
-            }
+    function updateUI(loggedIn) {
+        if (loggedIn) {
+            signInBtn.style.display = 'none';
+            signOutBtn.style.display = 'inline-block';
+        } else {
+            signInBtn.style.display = 'inline-block';
+            signOutBtn.style.display = 'none';
         }
-const backendURL = 'https://web-job3.onrender.com';
-
-// Check login status (optional API call)
-fetch(`${backendURL}/me`, { credentials: 'include' })
-    .then(res => res.ok)
-    .then(loggedIn => updateUI(loggedIn))
-    .catch(() => updateUI(false));
-
-signInBtn.addEventListener('click', () => {
-    fetch(`${backendURL}/login`, {    // <-- updated here
-        method: 'POST',
-        credentials: 'include'
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) updateUI(true);
-        else alert('Login failed');
-    });
-});
-
-signOutBtn.addEventListener('click', () => {
-    fetch(`${backendURL}/logout`, {   // <-- updated here
-        method: 'POST',
-        credentials: 'include'
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) updateUI(false);
-        else alert('Logout failed');
-    });
-});
-const loginModal = document.getElementById('loginModal');
-const modalOverlay = document.getElementById('modalOverlay');
-const modalLoginBtn = document.getElementById('modalLoginBtn');
-const modalCancelBtn = document.getElementById('modalCancelBtn');
-const modalUsername = document.getElementById('modalUsername');
-const modalPassword = document.getElementById('modalPassword');
-
-signInBtn.addEventListener('click', () => {
-  loginModal.style.display = 'block';
-  modalOverlay.style.display = 'block';
-  modalUsername.focus();
-});
-
-modalCancelBtn.addEventListener('click', () => {
-  loginModal.style.display = 'none';
-  modalOverlay.style.display = 'none';
-  modalUsername.value = '';
-  modalPassword.value = '';
-});
-
-modalOverlay.addEventListener('click', () => {
-  loginModal.style.display = 'none';
-  modalOverlay.style.display = 'none';
-  modalUsername.value = '';
-  modalPassword.value = '';
-});
-
-modalLoginBtn.addEventListener('click', () => {
-  const username = modalUsername.value.trim();
-  const password = modalPassword.value;
-
-  if (!username || !password) {
-    alert('Please enter username and password');
-    return;
-  }
-
-  fetch(`${backendURL}/login`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      updateUI(true);
-      loginModal.style.display = 'none';
-      modalOverlay.style.display = 'none';
-      modalUsername.value = '';
-      modalPassword.value = '';
-    } else {
-      alert('Login failed: ' + (data.message || 'Invalid credentials'));
     }
-  })
-  .catch(() => alert('Error connecting to server'));
-});
 
-    </script>
+    const backendURL = 'https://web-job3.onrender.com';
+
+    // Check login status (optional API call)
+    fetch(`${backendURL}/me`, { credentials: 'include' })
+        .then(res => res.ok)
+        .then(loggedIn => updateUI(loggedIn))
+        .catch(() => updateUI(false));
+
+    // Show login modal on Sign In click
+    signInBtn.addEventListener('click', () => {
+        loginModal.style.display = 'block';
+        modalOverlay.style.display = 'block';
+        modalUsername.focus();
+    });
+
+    // Hide modal on Cancel click
+    modalCancelBtn.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        modalOverlay.style.display = 'none';
+        modalUsername.value = '';
+        modalPassword.value = '';
+    });
+
+    // Hide modal on overlay click
+    modalOverlay.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        modalOverlay.style.display = 'none';
+        modalUsername.value = '';
+        modalPassword.value = '';
+    });
+
+    // Handle login form submission
+    modalLoginBtn.addEventListener('click', () => {
+        const username = modalUsername.value.trim();
+        const password = modalPassword.value;
+
+        if (!username || !password) {
+            alert('Please enter username and password');
+            return;
+        }
+
+        fetch(`${backendURL}/login`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                updateUI(true);
+                loginModal.style.display = 'none';
+                modalOverlay.style.display = 'none';
+                modalUsername.value = '';
+                modalPassword.value = '';
+            } else {
+                alert('Login failed: ' + (data.message || 'Invalid credentials'));
+            }
+        })
+        .catch(() => alert('Error connecting to server'));
+    });
+
+    // Handle logout
+    signOutBtn.addEventListener('click', () => {
+        fetch(`${backendURL}/logout`, {
+            method: 'POST',
+            credentials: 'include'
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) updateUI(false);
+            else alert('Logout failed');
+        });
+    });
+});
+</script>
+
     <!-- Login Modal -->
 <div id="loginModal" style="display:none; position: fixed; top: 50%; left: 50%; 
     transform: translate(-50%, -50%); background: white; border: 1px solid #ccc; 
