@@ -15,18 +15,18 @@
         </div>
 
         <nav class="nav-tabs">
-            <a href="index.html" class="nav-tab">
+            <div class="nav-tab active">
                 <span class="skill-icon">🏠</span>
                 Home
-            </a>
+            </div>
             <div class="nav-tab">
                 <span class="skill-icon">🎧</span>
                 Listening
             </div>
-            <div class="nav-tab active">
+            <a href="reading.html" class="nav-tab">
                 <span class="skill-icon">📚</span>
                 Reading
-            </div>
+            </a>
             <div class="nav-tab">
                 <span class="skill-icon">🗣️</span>
                 Speaking
@@ -37,10 +37,13 @@
             </div>
         </nav>
 
-        <div class="user-section" id="userSection">
-            <button id="signInBtn">Sign In</button>
-            <button id="signOutBtn" style="display: none;">Sign Out</button>
-        </div>
+       <div class="user-section" id="userSection">
+  <button id="signInBtn">Sign In</button>
+  <div id="userDropdown" style="display:none;">
+    <span id="userAbbr"></span>
+    <button id="signOutBtn" style="display:none;">Sign Out</button>
+  </div>
+</div>
     </header>
     
     <!-- Main content area -->
