@@ -28,7 +28,7 @@ app.use(session({
 
 // Dummy user data for demo purposes
 const users = [
-  { username: 'john', password: '1234' }
+  { username: 'john', password: 'hihi' }
 ];
 
 // Login route
