@@ -59,4 +59,72 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
   }
+
+  // Modal and login button handlers
+  const loginModal = document.getElementById('loginModal');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalLoginBtn = document.getElementById('modalLoginBtn');
+  const modalCancelBtn = document.getElementById('modalCancelBtn');
+  const modalUsername = document.getElementById('modalUsername');
+  const modalPassword = document.getElementById('modalPassword');
+  const signInBtn = document.getElementById('signInBtn');
+
+  if (signInBtn && loginModal && modalOverlay) {
+    signInBtn.addEventListener('click', () => {
+      loginModal.style.display = 'block';
+      modalOverlay.style.display = 'block';
+      modalUsername.focus();
+    });
+  }
+
+  if (modalCancelBtn) {
+    modalCancelBtn.addEventListener('click', () => {
+      loginModal.style.display = 'none';
+      modalOverlay.style.display = 'none';
+      modalUsername.value = '';
+      modalPassword.value = '';
+    });
+  }
+
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', () => {
+      loginModal.style.display = 'none';
+      modalOverlay.style.display = 'none';
+      modalUsername.value = '';
+      modalPassword.value = '';
+    });
+  }
+
+  if (modalLoginBtn) {
+    modalLoginBtn.addEventListener('click', () => {
+      const username = modalUsername.value.trim();
+      const password = modalPassword.value;
+
+      if (!username || !password) {
+        alert('Please enter username and password');
+        return;
+      }
+
+      fetch('/login', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            updateUI(true, username);
+            loginModal.style.display = 'none';
+            modalOverlay.style.display = 'none';
+            modalUsername.value = '';
+            modalPassword.value = '';
+          } else {
+            alert('Login failed: ' + (data.message || 'Invalid credentials'));
+          }
+        })
+        .catch(() => alert('Error connecting to server'));
+    });
+  }
 });
+
