@@ -6,32 +6,35 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// CORS configuration to allow your frontend domain with credentials
+// CORS config
 app.use(cors({
-  origin: 'https://linhnguyenielts.github.io', // your frontend URL
+  origin: 'https://linhnguyenielts.github.io',
   credentials: true
 }));
 
 app.use(bodyParser.json());
 
-// Session configuration with cookie settings for cross-origin
+// ✅ Tell Express to trust Render’s proxy (needed for secure cookies)
+app.set('trust proxy', 1);
+
+// Session config
 app.use(session({
-  secret: 'your-secret-key',      // change this to a strong secret in production
+  secret: 'your-secret-key',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: true,                 // must be true for HTTPS (Render uses HTTPS)
-    sameSite: 'none',             // allow cross-site cookies
+    secure: true,      // only send cookie over HTTPS
+    sameSite: 'none',  // required for cross-origin
     httpOnly: true
   }
 }));
 
-// Dummy user data for demo purposes
+// Dummy user
 const users = [
   { username: 'john', password: 'hihi' }
 ];
 
-// Login route
+// Login
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const user = users.find(u => u.username === username && u.password === password);
@@ -43,16 +46,16 @@ app.post('/login', (req, res) => {
   }
 });
 
-// Logout route
+// Logout
 app.post('/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) return res.json({ success: false, message: 'Logout failed' });
-    res.clearCookie('connect.sid', { path: '/' }); // clear cookie
+    res.clearCookie('connect.sid', { path: '/' });
     res.json({ success: true, message: 'Logged out' });
   });
 });
 
-// Check if logged in route
+// Who am I?
 app.get('/me', (req, res) => {
   if (req.session.user) {
     res.json({ user: req.session.user });
@@ -61,7 +64,6 @@ app.get('/me', (req, res) => {
   }
 });
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
