@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -7,23 +6,29 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// CORS configuration to allow your frontend domain with credentials
 app.use(cors({
-  origin: 'https://linhnguyenielts.github.io', // or wherever your frontend lives
+  origin: 'https://linhnguyenielts.github.io', // your frontend URL
   credentials: true
 }));
 
 app.use(bodyParser.json());
 
+// Session configuration with cookie settings for cross-origin
 app.use(session({
-  secret: 'secret-key',
+  secret: 'your-secret-key',      // change this to a strong secret in production
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // set to true in production with HTTPS
+  saveUninitialized: false,
+  cookie: {
+    secure: true,                 // must be true for HTTPS (Render uses HTTPS)
+    sameSite: 'none',             // allow cross-site cookies
+    httpOnly: true
+  }
 }));
 
-// Dummy user data
+// Dummy user data for demo purposes
 const users = [
-  { username: 'john', password: '1234' },
+  { username: 'john', password: '1234' }
 ];
 
 // Login route
@@ -31,44 +36,23 @@ app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const user = users.find(u => u.username === username && u.password === password);
   if (user) {
-    req.session.user = user;
-    res.json({ message: 'Login successful' });
+    req.session.user = { username: user.username };
+    res.json({ success: true, message: 'Login successful' });
   } else {
-    res.status(401).json({ message: 'Invalid credentials' });
+    res.status(401).json({ success: false, message: 'Invalid credentials' });
   }
-});
-
-// Logout route
-app.post('/logout', (req, res) => {
-  req.session.destroy(() => {
-    res.json({ message: 'Logged out' });
-  });
-});
-
-// Check if logged in
-app.get('/me', (req, res) => {
-  if (req.session.user) {
-    res.json({ user: req.session.user });
-  } else {
-    res.status(401).json({ message: 'Not logged in' });
-  }
-});
-// Login route
-app.post('/login', (req, res) => {
-  // You can later validate username/password from req.body
-  req.session.user = { name: 'John Doe' };
-  res.json({ success: true });
 });
 
 // Logout route
 app.post('/logout', (req, res) => {
   req.session.destroy(err => {
-    if (err) return res.json({ success: false });
-    res.json({ success: true });
+    if (err) return res.json({ success: false, message: 'Logout failed' });
+    res.clearCookie('connect.sid', { path: '/' }); // clear cookie
+    res.json({ success: true, message: 'Logged out' });
   });
 });
 
-// Check session route
+// Check if logged in route
 app.get('/me', (req, res) => {
   if (req.session.user) {
     res.json({ user: req.session.user });
@@ -77,7 +61,7 @@ app.get('/me', (req, res) => {
   }
 });
 
-// Start server
+// Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
