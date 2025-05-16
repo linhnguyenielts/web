@@ -13,12 +13,12 @@
             <img src="https://ieltsonlinetests.com/themes/iot/images/logo.svg" alt="English Skills Logo">
             <div class="logo-text">EnglishSkills</div>
         </div>
-        
+
         <nav class="nav-tabs">
             <a href="index.html" class="nav-tab">
-        <span class="skill-icon">🏠</span>
-        Home
-    </a>
+                <span class="skill-icon">🏠</span>
+                Home
+            </a>
             <div class="nav-tab">
                 <span class="skill-icon">🎧</span>
                 Listening
@@ -36,12 +36,10 @@
                 Writing
             </div>
         </nav>
-        
-        <div class="user-section">
-            <div class="user-profile">
-                <div class="user-avatar">JD</div>
-                <div class="user-name">John Doe</div>
-            </div>
+
+        <div class="user-section" id="userSection">
+            <button id="signInBtn">Sign In</button>
+            <button id="signOutBtn" style="display: none;">Sign Out</button>
         </div>
     </header>
     
@@ -64,7 +62,7 @@
         
         <!-- Content area with test grids -->
         <div class="content-area">
-            <h1 class="page-title">Reading Practice Tests</h1>
+            <h1 class="page-title-r">Reading Practice Tests</h1>
             
             <div class="tests-grid">
                 <!-- Test Card 1 -->
@@ -72,7 +70,7 @@
                     <div class="test-header">Cam 19 Test 4</div>
                     <div class="test-content">
                         <p class="test-info">Latest Cambridge IELTS 19 Reading Test 4 with answers and detailed explanations.</p>
-                        <a href="#" class="test-button">Start Test</a>
+                        <a href="#" class="test-button-r">Start Test</a>
                     </div>
                 </div>
                 
@@ -81,7 +79,7 @@
                     <div class="test-header">Cam 19 Test 3</div>
                     <div class="test-content">
                         <p class="test-info">Cambridge IELTS 19 Reading Test 3 with answers and detailed explanations.</p>
-                        <a href="#" class="test-button">Start Test</a>
+                        <a href="#" class="test-button-r">Start Test</a>
                     </div>
                 </div>
                 
@@ -90,7 +88,7 @@
                     <div class="test-header">Cam 19 Test 2</div>
                     <div class="test-content">
                         <p class="test-info">Cambridge IELTS 19 Reading Test 2 with answers and detailed explanations.</p>
-                        <a href="#" class="test-button">Start Test</a>
+                        <a href="#" class="test-button-r">Start Test</a>
                     </div>
                 </div>
                 
@@ -99,7 +97,7 @@
                     <div class="test-header">Cam 19 Test 1</div>
                     <div class="test-content">
                         <p class="test-info">Cambridge IELTS 19 Reading Test 1 with answers and detailed explanations.</p>
-                        <a href="cam19-1.html" class="test-button">Start Test</a>
+                        <a href="cam19-1.html" class="test-button-r">Start Test</a>
                     </div>
                 </div>
                 
@@ -108,7 +106,7 @@
                     <div class="test-header">Cam 18 Test 4</div>
                     <div class="test-content">
                         <p class="test-info">Cambridge IELTS 18 Reading Test 4 with answers and detailed explanations.</p>
-                        <a href="#" class="test-button">Start Test</a>
+                        <a href="#" class="test-button-r">Start Test</a>
                     </div>
                 </div>
                 
@@ -117,7 +115,7 @@
                     <div class="test-header">Cam 18 Test 3</div>
                     <div class="test-content">
                         <p class="test-info">Cambridge IELTS 18 Reading Test 3 with answers and detailed explanations.</p>
-                        <a href="#" class="test-button">Start Test</a>
+                        <a href="#" class="test-button-r">Start Test</a>
                     </div>
                 </div>
             </div>
@@ -181,7 +179,7 @@
     }
     
     // JavaScript for test buttons
-    document.querySelectorAll('.test-button').forEach(button => {
+    document.querySelectorAll('.test-button-r').forEach(button => {
         button.addEventListener('click', (e) => {
             if (!isUserLoggedIn()) {
                 e.preventDefault(); // Prevent default action (navigation)
