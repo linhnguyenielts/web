@@ -7,8 +7,10 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Allow requests from frontend (adjust origin if deployed)
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({
+  origin: 'https://linhnguyenielts.github.io', // or wherever your frontend lives
+  credentials: true
+}));
 
 app.use(bodyParser.json());
 
